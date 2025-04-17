@@ -10,6 +10,8 @@ HUGGINGFACE_API = "https://smartreadshelf-smartreadsummarizer.hf.space/run/predi
 @app.route("/summarize", methods=["POST"])
 def summarize():
     try:
+        if not request.is_json:
+            return jsonify({"error": "Invalid content-type. Expecting application/json"}), 415
         response = requests.post(HUGGINGFACE_API, json=request.get_json())
         return jsonify(response.json()), response.status_code
     except Exception as e:
