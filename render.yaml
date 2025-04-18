@@ -1,8 +1,6 @@
 services:
   - type: web
-    name: summarizer-proxy
+    name: summarizer-api
     env: python
-    plan: free
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn app:app"
-    envVars: []
+    startCommand: "python app.py"
